@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -22,12 +21,13 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class ActivityModuleList extends Activity 
+public class ActivityModuleList extends MainActivity 
 {
 	private List<String> moduleCodeList = new ArrayList<String>();
 	private List<Module> moduleList = new ArrayList<Module>();
-	private ModuleAdapter adapter;
 	private ListView listview;
+	ModuleAdapter adapter;
+	private Button bt_add;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -36,9 +36,9 @@ public class ActivityModuleList extends Activity
 		setContentView(R.layout.activity_list);
 		initModuleList();
 		listview = (ListView)findViewById(R.id.lst_module);
-		adapter = new ModuleAdapter(this,R.layout.list_item,moduleList);
+		adapter = new ModuleAdapter(this,R.layout.list_item,moduleList,ActivityModuleList.this);
 		listview.setAdapter(adapter);
-		Button bt_add = (Button)findViewById(R.id.bt_add);
+		bt_add = (Button)findViewById(R.id.bt_add);
 		
 		OnItemClickListener item_lst = new OnItemClickListener ()
 		{
@@ -128,22 +128,23 @@ public class ActivityModuleList extends Activity
 						String info = et_dialog_info.getText().toString();
 						if(moduleCode.equals(""))
 							Toast.makeText(getBaseContext(), "Please Enter Module Code!", Toast.LENGTH_SHORT).show();
-						if(moduleName.equals(""))
+						else if(moduleName.equals(""))
 							Toast.makeText(getBaseContext(), "Please Enter Module Name!", Toast.LENGTH_SHORT).show();
-						if(dayOfWeek.equals(""))
+						else if(dayOfWeek.equals(""))
 							Toast.makeText(getBaseContext(), "Please Enter Day Of Week!", Toast.LENGTH_SHORT).show();
-						if(startTime.equals("Start Time"))
+						else if(startTime.equals("Start Time"))
 							Toast.makeText(getBaseContext(), "Please Enter Start Time!", Toast.LENGTH_SHORT).show();
-						if(endTime.equals("End Time"))
+						else if(endTime.equals("End Time"))
 							Toast.makeText(getBaseContext(), "Please Enter End Time!", Toast.LENGTH_SHORT).show();
-						if(location.equals(""))
+						else if(location.equals(""))
 							Toast.makeText(getBaseContext(), "Please Enter Class Location!", Toast.LENGTH_SHORT).show();
 						else
 						{
 							Module module = new Module(moduleCode, moduleName, choice, dayOfWeek, startTime, endTime, location, info);
 							addModule(module);
 							dialog.dismiss();
-							refresh();        //******
+							initModuleList();
+							adapter.notifyDataSetChanged();
 						}
 					}
                 };
@@ -156,15 +157,10 @@ public class ActivityModuleList extends Activity
 		bt_add.setOnClickListener(lst_add);
 	}
 	
-	protected void refresh() 
-	{
-		finish();
-		onCreate(null); 
-	}
-	
 	public void initModuleList()
 	{
-		//SharedPreferenceUtil.clear(ActivityModuleList.this, "module_data");
+		moduleCodeList.clear();
+		moduleList.clear();
 		Object object = SharedPreferenceUtil.get(ActivityModuleList.this, "module_data", "modulelist");
 		if(object != null)
 		{	
