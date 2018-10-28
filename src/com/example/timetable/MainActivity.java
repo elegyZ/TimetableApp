@@ -1,16 +1,43 @@
 package com.example.timetable;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		final Button bt_start = (Button)findViewById(R.id.bt_start);
+		final Button bt_close = (Button)findViewById(R.id.bt_close);
+		
+		OnClickListener lst_start = new OnClickListener()
+		{
+			@Override
+			public void onClick(View arg0) 
+			{
+				Intent intent = new Intent(MainActivity.this,ActivityModuleList.class);
+				startActivity(intent);
+			}
+		};
+		
+		OnClickListener lst_close = new OnClickListener()
+		{
+			@Override
+			public void onClick(View arg0) {
+				finish();
+			}
+		};
+		bt_start.setOnClickListener(lst_start);
+		bt_close.setOnClickListener(lst_close);
 	}
 
 	@Override
