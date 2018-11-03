@@ -13,6 +13,7 @@ public class Module implements Serializable{
 	private String endTime;
 	private String location;
 	private String info;
+	private Integer alarm;
 	
 	public Module(String moduleCode,String moduleName, String choice, String dayOfWeek, String startTime, String endTime, String location, String info)
 	{
@@ -24,6 +25,7 @@ public class Module implements Serializable{
 		this.endTime = endTime;
 		this.location = location;
 		this.info = info;
+		this.alarm = null;
 	}
 	
 	public String getModuleCode() {
@@ -56,6 +58,16 @@ public class Module implements Serializable{
 	
 	public String getInfo() {
 		return info;
+	}
+	
+	public void setAlarm(Integer alarm)
+	{
+		this.alarm = alarm;
+	}
+	
+	public Integer getAlarm()
+	{
+		return alarm;
 	}
 }
 

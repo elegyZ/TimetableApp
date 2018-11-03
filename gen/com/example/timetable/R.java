@@ -9,7 +9,9 @@ package com.example.timetable;
 
 public final class R {
     public static final class array {
-        public static final int weekdays=0x7f070000;
+        public static final int font_styles=0x7f050000;
+        public static final int style_colors=0x7f050001;
+        public static final int weekdays=0x7f050002;
     }
     public static final class attr {
     }
@@ -30,55 +32,65 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f090030;
-        public static final int bt_add=0x7f090001;
-        public static final int bt_back=0x7f090015;
-        public static final int bt_close=0x7f090003;
-        public static final int bt_endTime=0x7f090023;
-        public static final int bt_ok=0x7f090028;
-        public static final int bt_start=0x7f090002;
-        public static final int bt_startTime=0x7f090021;
-        public static final int datePicker1=0x7f09002f;
-        public static final int et_dialog_info=0x7f090027;
-        public static final int et_dialog_location=0x7f090025;
-        public static final int et_dialog_moduleCode=0x7f090017;
-        public static final int et_dialog_moduleName=0x7f090019;
-        public static final int iv_delete=0x7f09002e;
-        public static final int lst_module=0x7f090000;
-        public static final int radioGroup1=0x7f09001b;
-        public static final int rbt_course=0x7f09001d;
-        public static final int rbt_lecture=0x7f09001c;
-        public static final int sp_fontChoice=0x7f090005;
-        public static final int sp_weekdays=0x7f09001f;
-        public static final int tv_dialog_choice=0x7f09001a;
-        public static final int tv_dialog_dayOfWeek=0x7f09001e;
-        public static final int tv_dialog_endTime=0x7f090022;
-        public static final int tv_dialog_info=0x7f090026;
-        public static final int tv_dialog_location=0x7f090024;
-        public static final int tv_dialog_moduleCode=0x7f090016;
-        public static final int tv_dialog_moduleName=0x7f090018;
-        public static final int tv_dialog_startTime=0x7f090020;
-        public static final int tv_fontChoice=0x7f090004;
-        public static final int tv_lst_choice=0x7f09002a;
-        public static final int tv_lst_dayOfWeek=0x7f09002b;
-        public static final int tv_lst_location=0x7f09002d;
-        public static final int tv_lst_moduleCode=0x7f090029;
-        public static final int tv_lst_startTime=0x7f09002c;
-        public static final int tv_module_choiceContent=0x7f09000a;
-        public static final int tv_module_dayOfWeek=0x7f09000b;
-        public static final int tv_module_dayOfWeekContent=0x7f09000c;
-        public static final int tv_module_endTime=0x7f09000f;
-        public static final int tv_module_endTimeContent=0x7f090010;
-        public static final int tv_module_info=0x7f090013;
-        public static final int tv_module_infoContent=0x7f090014;
-        public static final int tv_module_location=0x7f090011;
-        public static final int tv_module_locationContent=0x7f090012;
-        public static final int tv_module_moduleCode=0x7f090006;
-        public static final int tv_module_moduleCodeContent=0x7f090007;
-        public static final int tv_module_moduleName=0x7f090008;
-        public static final int tv_module_moduleNameContent=0x7f090009;
-        public static final int tv_module_startTime=0x7f09000d;
-        public static final int tv_module_startTimeContent=0x7f09000e;
+        public static final int action_settings=0x7f09003a;
+        public static final int bt_add=0x7f090002;
+        public static final int bt_back=0x7f09001e;
+        public static final int bt_close=0x7f090006;
+        public static final int bt_endTime=0x7f09002c;
+        public static final int bt_ok=0x7f090031;
+        public static final int bt_setTime=0x7f090039;
+        public static final int bt_start=0x7f090005;
+        public static final int bt_startTime=0x7f09002a;
+        public static final int bt_switch=0x7f090003;
+        public static final int et_dialog_info=0x7f090030;
+        public static final int et_dialog_location=0x7f09002e;
+        public static final int et_dialog_moduleCode=0x7f090020;
+        public static final int et_dialog_moduleName=0x7f090022;
+        public static final int iv_delete=0x7f090038;
+        public static final int layout_item=0x7f090032;
+        public static final int layout_list=0x7f090000;
+        public static final int layout_main=0x7f090004;
+        public static final int layout_module=0x7f09000e;
+        public static final int lst_module=0x7f090001;
+        public static final int radioGroup1=0x7f090024;
+        public static final int rbt_course=0x7f090026;
+        public static final int rbt_lecture=0x7f090025;
+        public static final int scroll_module=0x7f09000d;
+        public static final int sp_bgcolorChoice=0x7f09000c;
+        public static final int sp_fontChoice=0x7f090008;
+        public static final int sp_fontcolorChoice=0x7f09000a;
+        public static final int sp_weekdays=0x7f090028;
+        public static final int tv_bgcolorChoice=0x7f09000b;
+        public static final int tv_dialog_choice=0x7f090023;
+        public static final int tv_dialog_dayOfWeek=0x7f090027;
+        public static final int tv_dialog_endTime=0x7f09002b;
+        public static final int tv_dialog_info=0x7f09002f;
+        public static final int tv_dialog_location=0x7f09002d;
+        public static final int tv_dialog_moduleCode=0x7f09001f;
+        public static final int tv_dialog_moduleName=0x7f090021;
+        public static final int tv_dialog_startTime=0x7f090029;
+        public static final int tv_fontChoice=0x7f090007;
+        public static final int tv_fontcolorChoice=0x7f090009;
+        public static final int tv_lst_choice=0x7f090034;
+        public static final int tv_lst_dayOfWeek=0x7f090035;
+        public static final int tv_lst_location=0x7f090037;
+        public static final int tv_lst_moduleCode=0x7f090033;
+        public static final int tv_lst_startTime=0x7f090036;
+        public static final int tv_module_choiceContent=0x7f090013;
+        public static final int tv_module_dayOfWeek=0x7f090014;
+        public static final int tv_module_dayOfWeekContent=0x7f090015;
+        public static final int tv_module_endTime=0x7f090018;
+        public static final int tv_module_endTimeContent=0x7f090019;
+        public static final int tv_module_info=0x7f09001c;
+        public static final int tv_module_infoContent=0x7f09001d;
+        public static final int tv_module_location=0x7f09001a;
+        public static final int tv_module_locationContent=0x7f09001b;
+        public static final int tv_module_moduleCode=0x7f09000f;
+        public static final int tv_module_moduleCodeContent=0x7f090010;
+        public static final int tv_module_moduleName=0x7f090011;
+        public static final int tv_module_moduleNameContent=0x7f090012;
+        public static final int tv_module_startTime=0x7f090016;
+        public static final int tv_module_startTimeContent=0x7f090017;
     }
     public static final class layout {
         public static final int activity_list=0x7f030000;
@@ -86,43 +98,46 @@ public final class R {
         public static final int activity_module=0x7f030002;
         public static final int dialog_addmodule=0x7f030003;
         public static final int list_item=0x7f030004;
-        public static final int time_item=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int L=0x7f05001c;
-        public static final int Mo=0x7f05001d;
-        public static final int action_settings=0x7f050001;
-        public static final int add=0x7f050009;
-        public static final int app_name=0x7f050000;
-        public static final int back=0x7f05001b;
-        public static final int close=0x7f050008;
-        public static final int dialog_choice=0x7f05000c;
-        public static final int dialog_dayOfWeek=0x7f050013;
-        public static final int dialog_endTime=0x7f05000e;
-        public static final int dialog_info=0x7f050010;
-        public static final int dialog_location=0x7f05000f;
-        public static final int dialog_moduleCode=0x7f05000a;
-        public static final int dialog_moduleName=0x7f05000b;
-        public static final int dialog_startTime=0x7f05000d;
-        public static final int lecture=0x7f050011;
-        public static final int module_endTime=0x7f050017;
-        public static final int module_info=0x7f050019;
-        public static final int module_location=0x7f050018;
-        public static final int module_startTime=0x7f050016;
-        public static final int ok=0x7f050014;
-        public static final int practical=0x7f050012;
-        public static final int start=0x7f050007;
-        public static final int test_choice=0x7f050003;
-        public static final int test_dayOfWeek=0x7f050004;
-        public static final int test_info=0x7f05001a;
-        public static final int test_location=0x7f050006;
-        public static final int test_moduleCode=0x7f050002;
-        public static final int test_moduleName=0x7f050015;
-        public static final int test_startTime=0x7f050005;
-        public static final int tv_fontChoice=0x7f05001e;
+        public static final int L=0x7f06001c;
+        public static final int Mo=0x7f06001d;
+        public static final int action_settings=0x7f060001;
+        public static final int add=0x7f060009;
+        public static final int app_name=0x7f060000;
+        public static final int back=0x7f06001b;
+        public static final int bt_switch=0x7f060022;
+        public static final int close=0x7f060008;
+        public static final int dialog_choice=0x7f06000c;
+        public static final int dialog_dayOfWeek=0x7f060013;
+        public static final int dialog_endTime=0x7f06000e;
+        public static final int dialog_info=0x7f060010;
+        public static final int dialog_location=0x7f06000f;
+        public static final int dialog_moduleCode=0x7f06000a;
+        public static final int dialog_moduleName=0x7f06000b;
+        public static final int dialog_startTime=0x7f06000d;
+        public static final int lecture=0x7f060011;
+        public static final int module_endTime=0x7f060017;
+        public static final int module_info=0x7f060019;
+        public static final int module_location=0x7f060018;
+        public static final int module_startTime=0x7f060016;
+        public static final int ok=0x7f060014;
+        public static final int practical=0x7f060012;
+        public static final int setTime=0x7f06001f;
+        public static final int start=0x7f060007;
+        public static final int test_choice=0x7f060003;
+        public static final int test_dayOfWeek=0x7f060004;
+        public static final int test_info=0x7f06001a;
+        public static final int test_location=0x7f060006;
+        public static final int test_moduleCode=0x7f060002;
+        public static final int test_moduleName=0x7f060015;
+        public static final int test_startTime=0x7f060005;
+        public static final int tv_bgcolorChoice=0x7f060020;
+        public static final int tv_fontChoice=0x7f06001e;
+        public static final int tv_fontcolorChoice=0x7f060021;
     }
     public static final class style {
         /** 
@@ -146,10 +161,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

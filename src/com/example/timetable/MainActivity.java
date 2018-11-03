@@ -5,64 +5,97 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	public static Typeface typePerfetto;
+	public RelativeLayout layout;
 	private Button bt_start;
 	private Button bt_close;
 	private Spinner sp_fontChoice;
-	private List<String> fontsList = new ArrayList<String>();
-	private ArrayAdapter<String> adapter;
+	private Spinner sp_bgcolorChoice;
+	private Spinner sp_fontcolorChoice;
+	private List<TextView> textviewList = new ArrayList<TextView>();
+	private List<Button> buttonList = new ArrayList<Button>();
+	private String fontStyle;
+	private String fontColor;
+	private String bgColor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		layout = (RelativeLayout)findViewById(R.id.layout_main);
 		bt_start = (Button)findViewById(R.id.bt_start);
 		bt_close = (Button)findViewById(R.id.bt_close);
 		sp_fontChoice = (Spinner)findViewById(R.id.sp_fontChoice);
-		initList();
-		adapter = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1, android.R.id.text1, fontsList);
-		sp_fontChoice.setAdapter(adapter);
-		sp_fontChoice.setSelection(0, true);
+		sp_fontcolorChoice = (Spinner)findViewById(R.id.sp_fontcolorChoice);
+		sp_bgcolorChoice = (Spinner)findViewById(R.id.sp_bgcolorChoice);
+		initTextViewList();
+		initButtonList();
+		setStyle();
 		
-		OnItemSelectedListener lst_sp = new OnItemSelectedListener()
+		OnItemSelectedListener lst_font = new OnItemSelectedListener()
 		{
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) 
 			{
-				String font = (String)sp_fontChoice.getItemAtPosition(position);
-				if(font.equals("Perfetto"))
-				{
-					//Toast.makeText(MainActivity.this, font, Toast.LENGTH_SHORT).show();
-					typePerfetto = Typeface.createFromAsset(getAssets(), "Perfetto.ttf");
-					
-					//LayoutInflaterCompat.setFactory(LayoutInflater.from(MainActivity.this), new LayoutInflaterFactory() {});
-				}
+				fontStyle = sp_fontChoice.getItemAtPosition(position).toString();
+				SharedPreferenceUtil.save(MainActivity.this, "style_data", "fontStyle", fontStyle);
+				setFontStyle();
 			}
-
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
+				Toast.makeText(MainActivity.this, "nothing", Toast.LENGTH_SHORT).show();
 			}
-			
 		};
-		sp_fontChoice.setOnItemSelectedListener(lst_sp);
+		sp_fontChoice.setOnItemSelectedListener(lst_font);
+		
+		OnItemSelectedListener lst_fontColor = new OnItemSelectedListener()
+		{
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) 
+			{
+				fontColor = sp_fontcolorChoice.getItemAtPosition(position).toString();
+				SharedPreferenceUtil.save(MainActivity.this, "style_data", "fontColor", fontColor);
+				setFontColor();
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				Toast.makeText(MainActivity.this, "nothing", Toast.LENGTH_SHORT).show();
+			}
+		};
+		sp_fontcolorChoice.setOnItemSelectedListener(lst_fontColor);
+		
+		OnItemSelectedListener lst_bgColor = new OnItemSelectedListener()
+		{
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) 
+			{
+				bgColor = (String)sp_bgcolorChoice.getItemAtPosition(position);
+				SharedPreferenceUtil.save(MainActivity.this, "style_data", "bgColor", bgColor);
+				setBgStyle();
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				Toast.makeText(MainActivity.this, "nothing", Toast.LENGTH_SHORT).show();
+			}
+		};
+		sp_bgcolorChoice.setOnItemSelectedListener(lst_bgColor);
 		
 		OnClickListener lst_start = new OnClickListener()
 		{
@@ -84,12 +117,113 @@ public class MainActivity extends Activity {
 		bt_start.setOnClickListener(lst_start);
 		bt_close.setOnClickListener(lst_close);
 	}
-
-	public void initList()
+	
+	public void initButtonList()
 	{
-		fontsList.add("Regular");
-		fontsList.add("Perfetto");
+		buttonList.add(bt_start);
+		buttonList.add(bt_close);
 	}
+	
+	public void initTextViewList()
+	{
+		textviewList.add((TextView)findViewById(R.id.tv_fontChoice));
+		textviewList.add((TextView)findViewById(R.id.tv_fontcolorChoice));
+		textviewList.add((TextView)findViewById(R.id.tv_bgcolorChoice));
+	}
+	
+	public void setStyle()
+	{
+		setFontStyle();
+		setFontColor();
+		setBgStyle();
+	}
+	
+	public void setFontStyle()
+	{
+		int position = 0;
+		Typeface typeface = Typeface.DEFAULT;
+		Object object = SharedPreferenceUtil.get(MainActivity.this, "style_data", "fontStyle");
+		if(object != null)
+		{
+			String s = (String) object;
+			if(s.equals("Perfetto"))
+			{
+				fontStyle = "fonts/Perfetto.ttf";
+				typeface = Typeface.createFromAsset(getAssets(), fontStyle);
+				position = 1;
+			}
+			else if(s.equals("Snickles"))
+			{
+				fontStyle = "fonts/Snickles.ttf";
+				typeface = Typeface.createFromAsset(getAssets(), fontStyle);
+				position = 2;
+			}
+		}
+		for(TextView tv:textviewList)
+			tv.setTypeface(typeface);
+		for(Button bt:buttonList)
+			bt.setTypeface(typeface);
+		sp_fontChoice.setSelection(position, true);
+	}
+	
+	public void setFontColor()
+	{
+		int position = 0;
+		fontColor = "#000000";
+		Object object = SharedPreferenceUtil.get(MainActivity.this, "style_data", "fontColor");
+		if(object != null)
+		{
+			String s = (String) object;
+			if(s.equals("Blue"))
+			{
+				fontColor = "#6CA6CD";
+				position = 1;
+			}
+			else if(s.equals("Green"))
+			{
+				fontColor = "#6E8B3D";
+				position = 2;
+			}
+		}
+		for(TextView tv:textviewList)
+			tv.setTextColor(Color.parseColor(fontColor));
+		for(Button bt:buttonList)
+			bt.setTextColor(Color.parseColor(fontColor));
+		sp_fontcolorChoice.setSelection(position, true);
+	}
+	
+	public void setBgStyle()
+	{
+		int position = 0;
+		bgColor = "#FFFFFF";
+		Object object = SharedPreferenceUtil.get(MainActivity.this, "style_data", "bgColor");
+		if(object != null)
+		{
+			String s = (String) object;
+			if(s.equals("Blue"))
+			{
+				bgColor = "#CAE1FF";
+				position = 1;
+			}
+			else if(s.equals("Green"))
+			{
+				bgColor = "#CAFF70";
+				position = 2;
+			}
+		}
+		layout.setBackgroundColor(Color.parseColor(bgColor));
+		sp_bgcolorChoice.setSelection(position, true);
+	}
+	
+	public void fresh()
+	{
+		Intent intent=new Intent(this, MainActivity.class);
+		startActivity(intent);
+		finish();//close
+		overridePendingTransition(0, 0);
+		Toast.makeText(getBaseContext(), "fresh", Toast.LENGTH_SHORT).show();
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

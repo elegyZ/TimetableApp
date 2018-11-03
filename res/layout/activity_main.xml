@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -16,7 +17,7 @@
         android:layout_alignParentStart="true"
         android:layout_margin="20dp"
         android:text="@string/start" />
-    
+
     <Button
         android:id="@+id/bt_close"
         android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="50dp"
         android:text="@string/tv_fontChoice"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -40,8 +41,47 @@
         android:id="@+id/sp_fontChoice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/tv_fontChoice"
-        android:textAlignment="center" />
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:entries="@array/font_styles" />
+
+    <TextView
+        android:id="@+id/tv_fontcolorChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_fontChoice"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/tv_fontcolorChoice"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/sp_fontcolorChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_fontcolorChoice"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:entries="@array/style_colors" />
+
+    <TextView
+        android:id="@+id/tv_bgcolorChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_fontcolorChoice"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/tv_bgcolorChoice"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/sp_bgcolorChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_bgcolorChoice"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:entries="@array/style_colors" />
 
 </RelativeLayout>

@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".ActivityModuleList"></activity>
         <activity android:name=".ActivityModule"></activity>
+        <service android:name=".TimeNotificationService"></service>
+        <receiver android:name=".AlarmReceiver" android:process=":remote"></receiver>
     </application>
 
 </manifest>

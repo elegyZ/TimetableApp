@@ -12,7 +12,7 @@ import android.util.Base64;
 
 public class SharedPreferenceUtil 
 {
-	private static String objectToString(Object object) 
+	public static String objectToString(Object object) 
 	{
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = null;
@@ -28,7 +28,7 @@ public class SharedPreferenceUtil
         }
     }
 	
-	private static Object stringToObject(String objectString) 
+	public static Object stringToObject(String objectString) 
 	{
         byte[] mobileBytes = Base64.decode(objectString.getBytes(), Base64.DEFAULT);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(mobileBytes);
@@ -53,7 +53,8 @@ public class SharedPreferenceUtil
         editor.apply();
     }
 
-	public static Object get(Activity activity, String fileKey, String key) {
+	public static Object get(Activity activity, String fileKey, String key) 
+	{
         SharedPreferences sharedPreferences =  activity.getApplicationContext().getSharedPreferences(fileKey, Activity.MODE_PRIVATE);
         String string = sharedPreferences.getString(key, null);
         if (string != null) 

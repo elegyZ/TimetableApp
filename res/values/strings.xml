@@ -32,5 +32,9 @@
     <string name="L">L</string>
     <string name="Mo">Mo</string>
     <string name="tv_fontChoice">Chooce Your Font</string>
+    <string name="setTime">Notification Time</string>
+    <string name="tv_bgcolorChoice">Choose Your Background Color</string>
+    <string name="tv_fontcolorChoice">Choose Your Font Color</string>
+    <string name="bt_switch">Set Notification</string>
 
 </resources>

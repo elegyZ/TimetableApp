@@ -4,9 +4,13 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,17 +21,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class ActivityModuleList extends MainActivity 
+public class ActivityModuleList extends Activity 
 {
+	private RelativeLayout layout;
 	private List<String> moduleCodeList = new ArrayList<String>();
 	private List<Module> moduleList = new ArrayList<Module>();
 	private ListView listview;
 	ModuleAdapter adapter;
 	private Button bt_add;
+	private Button bt_switch;
+	private Intent intent_setTime;
+	private int flag;
+	private List<Button> buttonList = new ArrayList<Button>();
+	private String fontStyle;
+	private String fontColor;
+	private String bgColor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -35,12 +48,42 @@ public class ActivityModuleList extends MainActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
 		initModuleList();
+		layout = (RelativeLayout)findViewById(R.id.layout_list);
 		listview = (ListView)findViewById(R.id.lst_module);
 		adapter = new ModuleAdapter(this,R.layout.list_item,moduleList,ActivityModuleList.this);
 		listview.setAdapter(adapter);
 		bt_add = (Button)findViewById(R.id.bt_add);
+		bt_switch = (Button)findViewById(R.id.bt_switch);
+		intent_setTime = new Intent(ActivityModuleList.this,TimeNotificationService.class);
+		flag = getFlag();
+		if(flag % 2 == 1)
+			bt_switch.setText("Notification Open");
+		initButtonList();
+		setStyle();
 		
-		OnItemClickListener item_lst = new OnItemClickListener ()
+		OnClickListener lst_switch = new OnClickListener()
+		{
+			@Override
+			public void onClick(View arg0) 
+			{
+				setFlag();
+				if(flag % 2 == 1)
+				{
+					startService(intent_setTime);
+					Toast.makeText(ActivityModuleList.this, "You have OPENED notifications which announce you that certain course is about to start.", Toast.LENGTH_SHORT).show();
+					bt_switch.setText("Notification Open");
+				}
+				else
+				{
+					stopService(intent_setTime);
+					Toast.makeText(ActivityModuleList.this, "You have CLOSED notifications", Toast.LENGTH_SHORT).show();
+					bt_switch.setText("Notification Close");
+				}
+			}
+		};
+		bt_switch.setOnClickListener(lst_switch);
+		
+		OnItemClickListener item_lst = new OnItemClickListener()
 		{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
@@ -53,10 +96,10 @@ public class ActivityModuleList extends MainActivity
 			
 		};
 		listview.setOnItemClickListener(item_lst);
-		
+
 		OnClickListener lst_add = new OnClickListener() 
 		{
-
+			//after add should change the alarm intent************
 			@Override
 			public void onClick(View arg0) 
 			{   
@@ -184,13 +227,95 @@ public class ActivityModuleList extends MainActivity
 		SharedPreferenceUtil.save(ActivityModuleList.this, "module_data", module.getModuleCode(), module);
 	}
 	
+	public void freshModule(Module module)
+	{
+		SharedPreferenceUtil.save(ActivityModuleList.this, "module_data", module.getModuleCode(), module);
+	}
+	
 	public void deleteModule(Module module)
 	{
 		moduleCodeList.remove(module.getModuleCode());
-		if(moduleCodeList.isEmpty())
-			SharedPreferenceUtil.remove(ActivityModuleList.this, "module_data", "modulelist");
-		else
-			SharedPreferenceUtil.save(ActivityModuleList.this, "module_data", "modulelist", moduleCodeList);
+		SharedPreferenceUtil.save(ActivityModuleList.this, "module_data", "modulelist", moduleCodeList);
 		SharedPreferenceUtil.remove(ActivityModuleList.this, "module_data", module.getModuleCode());
+	}
+	
+	public int getFlag()
+	{
+		SharedPreferences sharedPreferences = getSharedPreferences("time_data",0);
+		return sharedPreferences.getInt("flag", 0);
+	}
+	
+	public void setFlag()
+	{
+		SharedPreferences sharedPreferences = getSharedPreferences("time_data",0);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putInt("flag", flag += 1);
+		editor.apply();
+	}
+
+	public void initButtonList()
+	{
+		buttonList.add(bt_add);
+		buttonList.add(bt_switch);
+	}
+	
+	public void setStyle()
+	{
+		setFontStyle();
+		setFontColor();
+		setBgStyle();
+	}
+	
+	public void setFontStyle()
+	{
+		Typeface typeface = Typeface.DEFAULT;
+		Object object = SharedPreferenceUtil.get(ActivityModuleList.this, "style_data", "fontStyle");
+		if(object != null)
+		{
+			String s = (String) object;
+			if(s.equals("Perfetto"))
+			{
+				fontStyle = "fonts/Perfetto.ttf";
+				typeface = Typeface.createFromAsset(getAssets(), fontStyle);
+			}
+			else if(s.equals("Snickles"))
+			{
+				fontStyle = "fonts/Snickles.ttf";
+				typeface = Typeface.createFromAsset(getAssets(), fontStyle);
+			}
+		}
+		for(Button bt:buttonList)
+			bt.setTypeface(typeface);
+	}
+	
+	public void setFontColor()
+	{
+		fontColor = "#000000";
+		Object object = SharedPreferenceUtil.get(ActivityModuleList.this, "style_data", "fontColor");
+		if(object != null)
+		{
+			String s = (String) object;
+			if(s.equals("Blue"))
+				fontColor = "#6CA6CD";
+			else if(s.equals("Green"))
+				fontColor = "#6E8B3D";
+		}
+		for(Button bt:buttonList)
+			bt.setTextColor(Color.parseColor(fontColor));
+	}
+	
+	public void setBgStyle()
+	{
+		bgColor = "#FFFFFF";
+		Object object = SharedPreferenceUtil.get(ActivityModuleList.this, "style_data", "bgColor");
+		if(object != null)
+		{
+			String s = (String) object;
+			if(s.equals("Blue"))
+				bgColor = "#CAE1FF";
+			else if(s.equals("Green"))
+				bgColor = "#CAFF70";
+		}
+		layout.setBackgroundColor(Color.parseColor(bgColor));
 	}
 }
