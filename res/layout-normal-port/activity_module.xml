@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_module"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/layout_module"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tv_module_moduleCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/dialog_moduleCode"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_module_moduleCodeContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_module_moduleCode"
+            android:layout_toEndOf="@+id/tv_module_moduleCode"
+            android:text="@string/test_moduleCode"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_module_moduleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_module_moduleCode"
+            android:layout_below="@+id/tv_module_moduleCode"
+            android:layout_marginBottom="20dp"
+            android:text="@string/dialog_moduleName"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_module_moduleNameContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_module_moduleName"
+            android:layout_alignStart="@+id/tv_module_moduleCodeContent"
+            android:layout_marginEnd="10dp"
+            android:text="@string/test_moduleName"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_module_choiceContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_module_moduleName"
+            android:layout_below="@+id/tv_module_moduleName"
+            android:layout_marginBottom="20dp"
+            android:text="@string/test_choice"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_module_dayOfWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_module_choiceContent"
+            android:layout_below="@+id/tv_module_choiceContent"
+            android:layout_marginBottom="20dp"
+            android:text="@string/dialog_dayOfWeek"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_module_dayOfWeekContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_module_dayOfWeek"
+            android:layout_alignStart="@+id/tv_module_moduleCodeContent"
+            android:text="@string/test_dayOfWeek"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_module_startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_module_dayOfWeek"
+            android:layout_below="@+id/tv_module_dayOfWeek"
+            android:layout_marginBottom="20dp"
+            android:text="@string/module_startTime"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_module_startTimeContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_module_startTime"
+            android:layout_alignStart="@+id/tv_module_dayOfWeekContent"
+            android:text="@string/test_startTime"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_module_endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_module_startTime"
+            android:layout_below="@+id/tv_module_startTime"
+            android:layout_marginBottom="20dp"
+            android:text="@string/module_endTime"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_module_endTimeContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_module_endTime"
+            android:layout_alignStart="@+id/tv_module_startTimeContent"
+            android:text="@string/test_startTime"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_module_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_module_endTime"
+            android:layout_below="@+id/tv_module_endTime"
+            android:layout_marginBottom="20dp"
+            android:text="@string/module_location"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_module_locationContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_module_location"
+            android:layout_alignStart="@+id/tv_module_endTimeContent"
+            android:text="@string/test_location"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tv_module_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_module_location"
+            android:layout_below="@+id/tv_module_location"
+            android:layout_marginBottom="5dp"
+            android:text="@string/module_info"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_module_infoContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_module_info"
+            android:layout_below="@+id/tv_module_info"
+            android:layout_marginEnd="10dp"
+            android:text="@string/test_info"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/bt_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tv_module_infoContent"
+            android:layout_margin="10dp"
+            android:text="@string/back" />
+    </RelativeLayout>
+
+</ScrollView>

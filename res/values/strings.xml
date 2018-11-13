@@ -36,5 +36,6 @@
     <string name="tv_bgcolorChoice">Choose Your Background Color</string>
     <string name="tv_fontcolorChoice">Choose Your Font Color</string>
     <string name="bt_switch">Set Notification</string>
+    <string name="tv_widget_hint">Upcoming Courses:</string>
 
 </resources>
